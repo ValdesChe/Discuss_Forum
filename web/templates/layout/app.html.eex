@@ -11,21 +11,17 @@
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<!--
+
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-     -->
+
   </head>
 
   <body>
     <div class="container">
       <nav>
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo">__ValdoR_Ix</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html">Item</a></li>
-            <li><a href="badges.html">Other</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
-          </ul>
+          <a href="/" class="brand-logo">__ValdoR_Ix</a>
+
         </div>
       </nav>
 
