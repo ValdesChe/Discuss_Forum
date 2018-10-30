@@ -19,12 +19,10 @@
   <body>
     <nav class="light-blue">
       <div class="nav-wrapper container">
-        <a href="/" class="brand-logo">__ValdoR_Ix</a>
+        <a href="<%= topic_path(@conn, :index) %>" class="brand-logo">__ValdoR_Ix</a>
       </div>
     </nav>
     <div class="container">
-
-
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
