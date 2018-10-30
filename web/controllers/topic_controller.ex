@@ -1,7 +1,13 @@
 defmodule Discuss.TopicController do
   use Discuss.Web, :controller
 
-  def new(conn, params) do
+  def index(conn, _params) do
+    topics = Repo.all(Discuss.Topic)
+
+    render(conn, "index.html", topics: topics)
+  end
+
+  def new(conn, _params) do
     # struct = %Discuss.Topic{}
     # params = %{}
 
@@ -15,22 +21,14 @@ defmodule Discuss.TopicController do
 
     case Repo.insert(changeset) do
       {:ok, post} ->
-        IO.inspect(post)
+        conn
+        |> put_flash(:info, "Topic Created successfully !")
+        |> redirect(to: topic_path(conn, :index))
 
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
-    end
-  end
-
-  def index(conn, _params) do
-    changeset = Discuss.Topic.changeset(%Discuss.Topic{}, topic)
-
-    case Repo.insert(changeset) do
-      {:ok, post} ->
-        IO.inspect(post)
-
-      {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        conn
+        |> put_flash(:error, "OuPs ! Something went wrong ..")
+        |> render("new.html", changeset: changeset)
     end
   end
 end

@@ -1,0 +1,21 @@
+<div class="" style="padding:5px;">
+
+
+  <h3>List of Topics</h3>
+  <ul class="collection">
+
+    <%=  for topic <- @topics do %>
+      <li class="collection-item">
+        <%= topic.title %>
+      </li>
+    <%= end %>
+  </ul>
+  <div class="fixed-action-btn">
+    <a href="<%= topic_path(@conn, :new) %>" class="btn-floating btn-large waves-effect waves-light red">
+      <i class="material-icons">add</i>
+    </a>
+  </div>
+
+
+
+</div>

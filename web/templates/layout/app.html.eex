@@ -17,13 +17,13 @@
   </head>
 
   <body>
+    <nav class="light-blue">
+      <div class="nav-wrapper container">
+        <a href="/" class="brand-logo">__ValdoR_Ix</a>
+      </div>
+    </nav>
     <div class="container">
-      <nav>
-        <div class="nav-wrapper">
-          <a href="/" class="brand-logo">__ValdoR_Ix</a>
 
-        </div>
-      </nav>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
