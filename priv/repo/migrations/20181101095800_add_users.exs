@@ -10,4 +10,11 @@ defmodule Discuss.Repo.Migrations.AddUsers do
       timestamps()
     end
   end
+
+  #
+  # def changeset(struct, params \\ %{}) do
+  #   struct
+  #   |> cast(params,[:email, :provider, :token])
+  #   |> validate_require([:email, :provider, :token])
+  # end
 end
