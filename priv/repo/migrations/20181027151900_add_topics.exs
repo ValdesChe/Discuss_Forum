@@ -3,7 +3,13 @@ defmodule Discuss.Repo.Migrations.AddTopics do
 
   def change do
     create table(:topics) do
-      add(:title, :string)
+      field(:title, :string)
     end
+  end
+
+  def changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:title])
+    |> validate_required([:title])
   end
 end

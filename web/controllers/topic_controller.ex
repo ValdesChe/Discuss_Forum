@@ -20,7 +20,7 @@ defmodule Discuss.TopicController do
     changeset = Discuss.Topic.changeset(%Discuss.Topic{}, topic)
 
     case Repo.insert(changeset) do
-      {:ok, post} ->
+      {:ok, _post} ->
         conn
         |> put_flash(:info, "Topic Created successfully !")
         |> redirect(to: topic_path(conn, :index))
@@ -48,7 +48,7 @@ defmodule Discuss.TopicController do
     IO.inspect(topic)
 
     case Repo.update(changeset) do
-      {:ok, post} ->
+      {:ok, _post} ->
         conn
         |> put_flash(:info, "Topic updated correctly !")
         |> redirect(to: topic_path(conn, :index))
