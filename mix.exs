@@ -43,10 +43,14 @@ defmodule Discuss.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:plug_cowboy, "~> 1.0"},
+
+      # For our OAuth service
       {:oauth2, "~> 0.8", override: true},
       {:oauth, github: "tim/erlang-oauth"},
       {:ueberauth, "~> 0.4"},
-      {:ueberauth_github, "~> 0.4"}
+      {:ueberauth_github, "~> 0.4"},
+      # For documentation
+      {:ex_doc, "~> 0.12"}
     ]
   end
 
