@@ -39,6 +39,7 @@ defmodule Discuss.Router do
     # Use the default browser stack
     pipe_through(:browser)
 
+    get("/signout/", AuthController, :signout)
     get("/:provider", AuthController, :request)
     get("/:provider/callback", AuthController, :callback)
   end
