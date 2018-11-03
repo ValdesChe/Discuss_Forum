@@ -4,6 +4,24 @@ defmodule Discuss.TopicController do
   # plug here mean that this plug will be execute before each handler
   plug(Discuss.Plugs.RequireAuth when action in [:new, :creeate, :edit, :update, :delete])
 
+  # here we are going to make a Function plug for avoiding update and del
+  # for user doens't owning a topic
+  plug(:check_topic_owner when action in [:edit, :update, :delete])
+
+  def check_topic_owner(conn, _params) do
+    %{params: %{"id" => topic_id}} = conn
+    topic = Discuss.Repo.get(Discuss.Topic, topic_id)
+
+    if topic && topic.user_id == conn.assigns.user.id do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You cannot edit that ! Contact the owner of this topic !")
+      |> redirect(to: topic_path(conn, :index))
+      |> halt()
+    end
+  end
+
   def index(conn, _params) do
     topics = Repo.all(Discuss.Topic)
 

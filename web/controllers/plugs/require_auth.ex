@@ -8,8 +8,8 @@ defmodule Discuss.Plugs.RequireAuth do
   end
 
   def call(conn, _params) do
-    IO.puts("+++++++")
-    IO.inspect(conn.assigns)
+    # IO.puts("+++++++")
+    # IO.inspect(conn.assigns)
 
     if(conn.assigns[:user]) do
       conn

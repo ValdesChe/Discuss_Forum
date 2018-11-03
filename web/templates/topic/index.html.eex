@@ -7,21 +7,28 @@
     <%=  for topic <- @topics do %>
       <li class="collection-item">
         <%= topic.title %>
-        <div class="right">
-          <!-- <a href="<%= topic_path(@conn, :edit, topic.id) %>">Edit</a>
-          <a href="<%= topic_path(@conn, :delete, topic.id) %>">Supprimer</a> -->
-          <%= link "Edit", to: topic_path(@conn, :edit, topic)  %> |
-          
-          <%= link "Delete", to: topic_path(@conn, :delete, topic), method: :delete  %>
-        </div>
+        <!-- <span class="">
+          At <%= topic.inserted_at %>
+        </span> -->
+        <%= if @conn.assigns.user && @conn.assigns.user.id == topic.user_id  do %>
+          <div class="right">
+            <!-- <a href="<%= topic_path(@conn, :edit, topic.id) %>">Edit</a>
+            <a href="<%= topic_path(@conn, :delete, topic.id) %>">Supprimer</a> -->
+            <%= link "Edit", to: topic_path(@conn, :edit, topic)  %> |
+
+            <%= link "Delete", to: topic_path(@conn, :delete, topic), method: :delete  %>
+          </div>
+        <%= end %>
       </li>
     <% end %>
   </ul>
-  <div class="fixed-action-btn">
-    <a href="<%= topic_path(@conn, :new) %>" class="btn-floating btn-large waves-effect waves-light red">
-      <i class="material-icons">add</i>
-    </a>
-  </div>
+  <%= if @conn.assigns.user do %>
+    <div class="fixed-action-btn">
+      <a href="<%= topic_path(@conn, :new) %>" class="btn-floating btn-large waves-effect waves-light red">
+        <i class="material-icons">add</i>
+      </a>
+    </div>
+  <%= end %>
 
 
 
