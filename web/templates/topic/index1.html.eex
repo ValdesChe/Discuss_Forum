@@ -6,7 +6,7 @@
 
     <%=  for topic <- @topics do %>
       <li class="collection-item">
-        <%= link topic.title, to: topic_path(@conn, :show, topic) %>
+        <%= topic.title %>
         <!-- <span class="">
           At <%= topic.inserted_at %>
         </span> -->

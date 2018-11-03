@@ -1,0 +1,8 @@
+<div class="" style="padding:5px;">
+
+
+  <h3>
+    <%= @topic.title %>
+  </h3>
+
+</div>

@@ -58,6 +58,18 @@ defmodule Discuss.TopicController do
     end
   end
 
+  def show(conn, %{"id" => topic_id}) do
+    topic = Discuss.Repo.get(Discuss.Topic, topic_id)
+
+    if topic do
+      render(conn, "show.html", topic: topic)
+    else
+      conn
+      |> put_flash(:error, "Trying to access incorrect URi")
+      |> redirect(to: topic_path(conn, :index))
+    end
+  end
+
   def edit(conn, %{"id" => topic_id}) do
     topic = Repo.get(Discuss.Topic, topic_id)
     changeset = Discuss.Topic.changeset(topic)
