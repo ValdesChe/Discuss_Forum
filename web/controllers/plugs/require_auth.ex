@@ -2,13 +2,15 @@ defmodule Discuss.Plugs.RequireAuth do
   import Plug.Conn
   import Phoenix.Controller
 
-  alias Discuss.User
   alias Discuss.Router.Helpers
 
   def init(_params) do
   end
 
   def call(conn, _params) do
+    IO.puts("+++++++")
+    IO.inspect(conn.assigns)
+
     if(conn.assigns[:user]) do
       conn
     else

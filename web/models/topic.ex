@@ -3,6 +3,9 @@ defmodule Discuss.Topic do
 
   schema "topics" do
     field(:title, :string)
+
+    belongs_to(:user, Discuss.User)
+    timestamps()
   end
 
   # When we want to modify some data

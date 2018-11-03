@@ -1,6 +1,9 @@
 defmodule Discuss.TopicController do
   use Discuss.Web, :controller
 
+  # plug here mean that this plug will be execute before each handler
+  plug(Discuss.Plugs.RequireAuth when action in [:new, :creeate, :edit, :update, :delete])
+
   def index(conn, _params) do
     topics = Repo.all(Discuss.Topic)
 
@@ -17,7 +20,12 @@ defmodule Discuss.TopicController do
   end
 
   def create(conn, %{"topic" => topic}) do
-    changeset = Discuss.Topic.changeset(%Discuss.Topic{}, topic)
+    # changeset = Discuss.Topic.changeset(%Discuss.Topic{}, topic)
+
+    changeset =
+      conn.assigns[:user]
+      |> build_assoc(:topics)
+      |> Discuss.Topic.changeset(topic)
 
     case Repo.insert(changeset) do
       {:ok, _post} ->
