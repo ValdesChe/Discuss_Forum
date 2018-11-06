@@ -45,6 +45,12 @@ defmodule Discuss.TopicController do
       |> build_assoc(:topics)
       |> Discuss.Topic.changeset(topic)
 
+    #
+    # IO.puts("*-/****************/*************")
+    # IO.inspect(conn.assigns[:user])
+    # IO.inspect(changeset)
+    # IO.puts("*-/****************/*************")
+
     case Repo.insert(changeset) do
       {:ok, _post} ->
         conn

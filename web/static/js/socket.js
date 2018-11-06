@@ -11,16 +11,22 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Connect to our backend server
 socket.connect()
 
-// Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("comments:1", {})
-channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+const createSocket = (topicId) => {
 
+  // Now that you are connected, you can join channels with a topic:
+  let channel = socket.channel(`comments:${topicId}`, {})
+  channel.join()
+    .receive("ok", resp => { console.log("Joined successfully", resp) })
+    .receive("error", resp => { console.log("Unable to join", resp) })
 
-document.querySelector('button').addEventListener('click', function () {
-  channel.push('comment:hello',{hi:"THERE !"} )
-})
+  document.querySelector('button').addEventListener('click',function () {
+    const content = document.querySelector('textarea').value
+    channel.push('comments:add', {content: content})
+  })
 
-// Import the socet obj
-export default socket
+}
+
+window.createSocket = createSocket;
+
+// Exporting the socket obj
+//export default socket

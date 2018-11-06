@@ -1,9 +1,20 @@
+
 <div class="" style="padding:5px;">
 
 
   <h3>
-    <%= @topic.title %>
+    Topic : <%= @topic.title %>
   </h3>
-  <button type="button" name="button">PING</button>
+
+  <div class="input-field">
+      <p>Write a comment:s</p>
+      <textarea name="content" rows="8" cols="100"  class="materialize-textarea"></textarea>
+      <button type="button"class="btn" name="button">Add comment</button>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      window.createSocket(<%= @topic.id %>)
+    })
+  </script>
 
 </div>
