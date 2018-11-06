@@ -1,5 +1,5 @@
 defmodule Discuss.Comment do
-  import Discuss.Web, :model
+  use Discuss.Web, :model
 
   schema "comments" do
     field(:content, :string)
