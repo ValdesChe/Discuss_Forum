@@ -4,5 +4,6 @@
   <h3>
     <%= @topic.title %>
   </h3>
+  <button type="button" name="button">PING</button>
 
 </div>

@@ -4,13 +4,19 @@ defmodule Discuss.CommentsChannel do
   # anytime a JS CLient join the channel
   def join(name, _params, socket) do
     #
-    IO.puts("1: ++++++++++++++++++++")
-    IO.puts(name)
-    IO.puts("2: ++++++++++++++++++++")
-    {:ok, %{}, socket}
+    {:ok, %{hey: "There"}, socket}
   end
 
-  def handle_in(socket) do
+  def handle_in(name, message, socket) do
     #
+
+    IO.puts("++++++++++++++++++++")
+    IO.puts(name)
+    IO.inspect(message)
+    IO.inspect(socket)
+
+    IO.puts(" ++++++++++++++++++++")
+
+    {:reply, :ok, socket}
   end
 end
