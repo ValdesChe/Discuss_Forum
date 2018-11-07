@@ -11,7 +11,8 @@ defmodule Discuss.CommentsChannel do
     topic =
       Topic
       |> Discuss.Repo.get(topic_id)
-      |> Discuss.Repo.preload(comments: from(c in Comment, order_by: c.inserted_at))
+      # |> Discuss.Repo.preload(comments: from(c in Comment, order_by: c.inserted_at))
+      |> Discuss.Repo.preload(comments: [:user])
 
     IO.puts("***** Join *******")
     IO.inspect(topic)
