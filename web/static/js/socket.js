@@ -11,18 +11,31 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Connect to our backend server
 socket.connect()
 
+// render all the comments for a topic
 function renderComments(comments) {
 
     const renderedList = comments.map((comment) => {
-      console.log(comment);
-       return `
-       <li class="collection-item">
-          ${comment.content}
-       </li>
-       `
+      // console.log(comment);
+      return commentTemplate(comment)
     });
-
+    //console.log(renderedList);
     document.querySelector('.collection').innerHTML = renderedList.join(' ')
+}
+
+//
+function renderComment(event) {
+    const renderedComment = commentTemplate(event.comment)
+
+    document.querySelector('.collection').innerHTML += renderedComment
+}
+
+//
+function commentTemplate(comment) {
+    return `
+    <li class="collection-item">
+       ${comment.content}
+    </li>
+    `;
 }
 
 const createSocket = (topicId) => {
@@ -31,10 +44,12 @@ const createSocket = (topicId) => {
   let channel = socket.channel(`comments:${topicId}`, {})
   channel.join()
     .receive("ok", resp => {
-        // console.log("Joined successfully", resp)
+        //console.log("Joined successfully", resp)
         renderComments(resp.comments)
      })
     .receive("error", resp => { console.log("Unable to join", resp) })
+
+  channel.on(`comments:${topicId}:new`, renderComment)
 
   document.querySelector('button').addEventListener('click',function () {
     const content = document.querySelector('textarea').value

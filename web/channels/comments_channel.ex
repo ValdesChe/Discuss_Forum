@@ -30,6 +30,9 @@ defmodule Discuss.CommentsChannel do
 
     case Repo.insert(changeset) do
       {:ok, comment} ->
+        # Now we notify the changes to every users via broadcast method
+        # ! is for logging error if something goes wrong
+        broadcast!(socket, "comments:#{socket.assigns.topic.id}:new", %{comment: comment})
         {:reply, :ok, socket}
 
       # socket = Map.put_new(socket.assign, arg2, arg3)
