@@ -11,6 +11,11 @@
       <textarea name="content" rows="8" cols="100"  class="materialize-textarea"></textarea>
       <button type="button"class="btn" name="button">Add comment</button>
   </div>
+  <div id="">
+      <ul class="collection">
+
+      </ul>
+  </div>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       window.createSocket(<%= @topic.id %>)

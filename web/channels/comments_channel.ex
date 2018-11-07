@@ -21,8 +21,6 @@ defmodule Discuss.CommentsChannel do
   end
 
   def handle_in(name, %{"content" => content}, socket) do
-    IO.puts("***** Handle *******")
-
     topic = socket.assigns[:topic]
 
     changeset =
@@ -32,7 +30,6 @@ defmodule Discuss.CommentsChannel do
 
     case Repo.insert(changeset) do
       {:ok, comment} ->
-        IO.puts("********--------------------**********")
         {:reply, :ok, socket}
 
       # socket = Map.put_new(socket.assign, arg2, arg3)

@@ -11,12 +11,29 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Connect to our backend server
 socket.connect()
 
+function renderComments(comments) {
+
+    const renderedList = comments.map((comment) => {
+      console.log(comment);
+       return `
+       <li class="collection-item">
+          ${comment.content}
+       </li>
+       `
+    });
+
+    document.querySelector('.collection').innerHTML = renderedList.join(' ')
+}
+
 const createSocket = (topicId) => {
 
   // Now that you are connected, you can join channels with a topic:
   let channel = socket.channel(`comments:${topicId}`, {})
   channel.join()
-    .receive("ok", resp => { console.log("Joined successfully", resp) })
+    .receive("ok", resp => {
+        // console.log("Joined successfully", resp)
+        renderComments(resp.comments)
+     })
     .receive("error", resp => { console.log("Unable to join", resp) })
 
   document.querySelector('button').addEventListener('click',function () {
