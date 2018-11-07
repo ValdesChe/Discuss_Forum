@@ -7,13 +7,17 @@ defmodule Discuss.CommentsChannel do
   def join("comments:" <> topic_id, _params, socket) do
     #
     topic_id = String.to_integer(topic_id)
-    topic = Discuss.Repo.get(Topic, topic_id)
+
+    topic =
+      Topic
+      |> Discuss.Repo.get(topic_id)
+      |> Discuss.Repo.preload(comments: from(c in Comment, order_by: c.inserted_at))
 
     IO.puts("***** Join *******")
     IO.inspect(topic)
     IO.puts("************")
 
-    {:ok, %{}, assign(socket, :topic, topic)}
+    {:ok, %{comments: topic.comments}, assign(socket, :topic, topic)}
   end
 
   def handle_in(name, %{"content" => content}, socket) do
@@ -23,7 +27,7 @@ defmodule Discuss.CommentsChannel do
 
     changeset =
       topic
-      |> build_assoc(:comment)
+      |> build_assoc(:comments)
       |> Comment.changeset(%{content: content})
 
     case Repo.insert(changeset) do
